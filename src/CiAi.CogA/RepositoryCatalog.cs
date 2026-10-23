@@ -25,6 +25,7 @@ public sealed record RepositoryId
 
     private static bool IsSegment(string value) =>
         value.Length is > 0 and <= 100 &&
+        value is not "." and not ".." &&
         value.All(c => char.IsAsciiLetterOrDigit(c) || c is '-' or '_' or '.');
 
     public override string ToString() => Value;
