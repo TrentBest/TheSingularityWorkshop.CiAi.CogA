@@ -25,11 +25,14 @@ public static class CatalogValidator
         var knownRepositories = repositoryIds.ToHashSet(StringComparer.OrdinalIgnoreCase);
         var knownCapabilities = catalog.Capabilities
             .Where(c => IsToken(c.Id) && IsVersion(c.ContractVersion))
-            .ToDictionary(c => c.Id, StringComparer.Ordinal);
-        var declarations = new HashSet<(string Repository, string Capability, CapabilityRole Role)>();
+            .GroupBy(c => c.Id, StringComparer.Ordinal)
+            .ToDictionary(g => g.Key, g => g.First(), StringComparer.Ordinal);
 
         foreach (var declaration in catalog.Declarations)
         {
+            if (!knownRepositories.Contains(declaration.Repository))
+                issues.Add(new("declaration.unknown-repository", declaration.Repository, "Declaration references a repository that is not in the catalog."));
+
             if (!knownCapabilities.TryGetValue(declaration.CapabilityId, out var definition))
             {
                 issues.Add(new("capability.unknown", declaration.CapabilityId, "Declaration references an undefined capability."));
