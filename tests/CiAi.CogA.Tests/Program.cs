@@ -28,7 +28,8 @@ void ValidCatalogHasNoIssues()
 
 void MalformedRepositoryIdentityRejected()
 {
-    Check(!RepositoryId.TryParse("owner/../repo", out _), "dot-dot segment must be rejected");
+    Check(!RepositoryId.TryParse("owner/../repo", out _), "extra path segment must be rejected");
+    Check(!RepositoryId.TryParse("owner/..", out _), "dot-dot segment must be rejected");
     Check(!RepositoryId.TryParse("owner /repo", out _), "whitespace must be rejected");
     Check(!RepositoryId.TryParse("owner/repo/extra", out _), "extra path segment must be rejected");
 }
