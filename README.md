@@ -9,10 +9,11 @@ The model follows the parent [inter-repository contract](https://github.com/Tren
 Requires the .NET 8 SDK.
 
 ```bash
-dotnet run --project tests/CiAi.CogA.Tests
+dotnet run --project samples/CiAi.CogA.Sample/CiAi.CogA.Sample.csproj
+dotnet run --project tests/CiAi.CogA.Tests/CiAi.CogA.Tests.csproj
 ```
 
-The executable contract tests use no external test framework, credentials, network access, or GitHub calls. They cover a valid catalog, malformed and duplicate identities, unknown capabilities, incompatible contract major versions, invalid edge endpoints, duplicate relationship IDs, and declarations for unknown repositories.
+The sample demonstrates a structurally valid two-repository catalog. The executable contract checks use no external test framework, credentials, network access, or GitHub calls. They cover valid and malformed catalog structures, duplicate identities, unknown capabilities, incompatible contract major versions, invalid edge endpoints, self-edges, and declarations for unknown repositories.
 
 ## 02 — What CogA models
 
@@ -31,6 +32,7 @@ CogA performs no GitHub API calls, dispatch, credential handling, publishing, de
 
 - [Gallery.md](Gallery.md) — capability and relationship model overview.
 - [Offline catalog recipe](docs/recipes/offline-catalog.md) — construct and validate a small catalog.
+- [Integration proposal](docs/INTEGRATION.md) — questions to reconcile before cross-repository integration.
 - [Source documentation](src/CiAi.CogA/README.md) — companion guide for the library source.
 - [UML class diagram](docs/UML/RepositoryCatalogUML.md) — model relationships and use cases.
 - [Readiness](docs/READINESS.md) — implemented scope, remaining work, and evidence.
@@ -41,7 +43,7 @@ The catalog is a projection of declared architecture, not proof of runtime conne
 
 ## Status
 
-**Implementation readiness: 35%.** A small dependency-free .NET library and executable offline validation checks now exist. This is a design slice, not a production integration: no provider ingestion, persisted manifest format, ProtocolAi binding, semantic-version range negotiation, CI workflow, or GUI projection is claimed complete.
+**Implementation readiness: 35%.** A small dependency-free .NET library, runnable sample, executable offline validation checks, documentation, and a CI workflow definition now exist. CI has not yet been observed green, and this is not a production integration: no provider ingestion, persisted manifest format, ProtocolAi binding, semantic-version range negotiation, or GUI projection is claimed complete.
 
 ---
 
