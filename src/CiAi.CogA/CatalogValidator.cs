@@ -94,7 +94,8 @@ public static class CatalogValidator
         var parts = value.Split('.');
         return parts.Length == 3 && parts.All(p =>
             p.Length > 0 && p.All(char.IsAsciiDigit) &&
-            (p.Length == 1 || p[0] != '0'));
+            (p == "0" || p[0] is >= '1' and <= '9')) &&
+            parts[0][0] is >= '1' and <= '9';
     }
 
     private static bool SameMajor(string left, string right) =>
