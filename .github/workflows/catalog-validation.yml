@@ -21,3 +21,5 @@ jobs:
         run: dotnet build src/CiAi.CogA/CiAi.CogA.csproj --configuration Release
       - name: Run offline contract checks
         run: dotnet run --project tests/CiAi.CogA.Tests/CiAi.CogA.Tests.csproj --configuration Release
+      - name: Run catalog sample
+        run: dotnet run --project samples/CiAi.CogA.Sample/CiAi.CogA.Sample.csproj --configuration Release
