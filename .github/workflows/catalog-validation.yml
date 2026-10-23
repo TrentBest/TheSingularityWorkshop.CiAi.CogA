@@ -2,7 +2,7 @@ name: CogA catalog validation
 
 on:
   push:
-    branches: [development]
+    branches: [development, master]
   pull_request:
     branches: [development]
   workflow_dispatch:
