@@ -1,3 +1,5 @@
+![The Singularity Workshop moniker](https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.GUI/development/docs/assets/fox-sheepdog-10x10.svg)
+
 # CiAi.CogA — Repository Catalog
 
 **CogA owns the offline catalog model:** canonical repository identities, declared capabilities, and directed, versioned relationships. It is an experimental design slice within [CiAi](https://github.com/TrentBest/TheSingularityWorkshop.CiAi), not a GitHub client or workflow dispatcher.
