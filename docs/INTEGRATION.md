@@ -28,10 +28,24 @@ The parent CiAi contract at `docs/INTER_REPOSITORY_MODEL.md` and assignments at 
 | Correlation, idempotency, and run evidence | Not modeled by CogA's offline catalog | Deferred to the request/result integration led by CogB/CogC and authoritative GitHub evidence. Do not add these as if CogA alone can validate them. |
 | Controlled vocabulary | Current capability IDs are application-owned strings | ProtocolAi mapping/ownership remains unresolved; inspect its real API and reconcile through CogD before treating IDs as shared protocol symbols. |
 
+## ProtocolAi mapping proposal for reconciliation
+
+ProtocolAi's documented model assigns symbols within a named protocol: a symbol has an integer identity and a name/value, and a reference is scoped by both protocol ID and symbol ID. Therefore, a CogA string such as `Requests` or `ExecutesBuilds` must **not** be assumed to be a ProtocolAi symbol ID, and a bare string must not be treated as globally unique semantic identity.
+
+Recommended boundary, subject to CogD and parent-contract approval:
+
+1. **Keep CogA's current string IDs as local catalog keys for this offline slice.** Do not add a ProtocolAi package dependency, hard-code numeric IDs, or imply that these strings are already wire-compatible.
+2. **Have CogD own the controlled vocabulary proposal.** It should define the protocol identity and explicit symbols for approved relationship types, capability roles, and operation names using the actual ProtocolAi API. Numeric protocol/symbol IDs must come from that reviewed definition, not be guessed by CogA.
+3. **Keep domain capability identity distinct from a generic role/type.** `ExecutesBuilds` describes a role; it does not identify the particular capability being provided. A capability ID needs an agreed namespace and version policy before it can be mapped safely.
+4. **Translate at an explicit integration boundary.** CiAi can resolve a validated catalog key to an approved ProtocolAi reference after confirming the expected protocol identity. Unknown, wrong-protocol, or unmapped symbols must be rejected for action; a literal string is not authorization.
+5. **Preserve source meaning and evidence.** Any future translated representation should retain the original catalog key and vocabulary/version provenance so mapping changes are reviewable. Do not silently renumber or reinterpret existing catalog entries.
+
+This is a proposal for a seam between the independently tested cogs, not a claim that CogA can currently encode or resolve ProtocolAi payloads. It does not define a wire format or authorize dispatch.
+
 ## Contract questions requiring reconciliation
 
 1. Confirm `owner/name` as the canonical key and decide case/normalization rules.
-2. Assign ownership and stable identifiers for capability and relationship vocabulary, including how CogA values map to ProtocolAi symbols.
+2. Have CogD propose the ProtocolAi protocol identity and symbol mapping; agree ownership, stable identifiers, and capability namespace before adopting shared IDs.
 3. Agree on version grammar and compatibility semantics across catalog, request, and result models.
 4. Define how authorization labels reference host policy without implying that a catalog grants permission.
 5. Define which evidence fields link a topology edge to a correlated request/result and verified workflow run.
@@ -39,7 +53,7 @@ The parent CiAi contract at `docs/INTER_REPOSITORY_MODEL.md` and assignments at 
 
 ## Recommended next step
 
-Reconcile these mappings with the parent contract before changing public model types or introducing a serialized schema. Keep CogA dependency-free and offline; let CiAi own trusted metadata resolution and authorization, CogB/CogC own request/result transport and evidence, CogD own deterministic vocabulary/policy alignment, and CogE own presentation-neutral projection.
+Review the mapping proposal with the parent contract and CogD before changing public model types or introducing a serialized schema. Keep CogA dependency-free and offline; let CiAi own trusted metadata resolution and authorization, CogB/CogC own request/result transport and evidence, CogD own deterministic vocabulary/policy alignment, and CogE own presentation-neutral projection.
 
 ## Non-goals
 
