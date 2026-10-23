@@ -6,7 +6,7 @@ static RepositoryId Repo(string value) =>
         : throw new ArgumentException($"Invalid repository identity: {value}");
 
 var catalog = new RepositoryCatalog(
-    new[] { Repo("TrentBest/TheSingularityWorkshop.CiAi"), Repo("TrentBest/HeadlessAi") },
+    new[] { Repo("TrentBest/TheSingularityWorkshop.CiAi"), Repo("TrentBest/TheSingularityWorkshop.HeadlessAi") },
     new[] { new CapabilityDefinition("normalized-request", "1.0.0") },
     new[]
     {
@@ -21,7 +21,7 @@ var catalog = new RepositoryCatalog(
         new RepositoryRelationship(
             "ciai-to-headlessai-request",
             "TrentBest/TheSingularityWorkshop.CiAi",
-            "TrentBest/HeadlessAi",
+            "TrentBest/TheSingularityWorkshop.HeadlessAi",
             RelationshipType.Requests,
             "normalized-request",
             "1.0.0",
