@@ -5,11 +5,16 @@ Run("valid catalog", ValidCatalogHasNoIssues);
 Run("malformed repository identity rejected", MalformedRepositoryIdentityRejected);
 Run("duplicate repository identity rejected", DuplicateRepositoryRejected);
 Run("unknown capability rejected", UnknownCapabilityRejected);
+Run("malformed capability ID rejected", MalformedCapabilityIdRejected);
+Run("malformed capability version rejected", MalformedCapabilityVersionRejected);
 Run("incompatible major version rejected", IncompatibleVersionRejected);
 Run("unknown edge endpoint rejected", UnknownEndpointRejected);
 Run("duplicate relationship ID rejected", DuplicateRelationshipRejected);
+Run("malformed relationship ID rejected", MalformedRelationshipIdRejected);
+Run("invalid relationship type rejected", InvalidRelationshipTypeRejected);
 Run("self-edge rejected", SelfEdgeRejected);
 Run("declaration for unknown repository rejected", UnknownDeclarationRepositoryRejected);
+Run("invalid declaration role rejected", InvalidDeclarationRoleRejected);
 
 Console.WriteLine($"PASS: {passed} catalog validation checks.");
 
@@ -46,6 +51,18 @@ void UnknownCapabilityRejected()
     Check(CatalogValidator.Validate(catalog).Any(i => i.Code == "capability.unknown"), "unknown capability issue expected");
 }
 
+void MalformedCapabilityIdRejected()
+{
+    var catalog = ValidCatalog(capabilities: new[] { new CapabilityDefinition("bad id", "1.0.0") });
+    Check(CatalogValidator.Validate(catalog).Any(i => i.Code == "capability.malformed-id"), "malformed capability ID issue expected");
+}
+
+void MalformedCapabilityVersionRejected()
+{
+    var catalog = ValidCatalog(capabilities: new[] { new CapabilityDefinition("request-envelope", "01.0.0") });
+    Check(CatalogValidator.Validate(catalog).Any(i => i.Code == "version.malformed"), "malformed capability version issue expected");
+}
+
 void IncompatibleVersionRejected()
 {
     var catalog = ValidCatalog(relationships: new[] { Edge(version: "2.0.0") });
@@ -64,6 +81,23 @@ void DuplicateRelationshipRejected()
     Check(CatalogValidator.Validate(catalog).Any(i => i.Code == "relationship.duplicate"), "duplicate relationship issue expected");
 }
 
+void MalformedRelationshipIdRejected()
+{
+    var catalog = ValidCatalog(relationships: new[] { Edge(id: "bad id") });
+    Check(CatalogValidator.Validate(catalog).Any(i => i.Code == "relationship.malformed-id"), "malformed relationship ID issue expected");
+}
+
+void InvalidRelationshipTypeRejected()
+{
+    var invalid = (RelationshipType)999;
+    var catalog = ValidCatalog(relationships: new[]
+    {
+        new RepositoryRelationship("edge-1", "workshop/CiAi", "workshop/HeadlessAi",
+            invalid, "request-envelope", "1.0.0", "manual", "ci-request-approved")
+    });
+    Check(CatalogValidator.Validate(catalog).Any(i => i.Code == "relationship.invalid-type"), "invalid relationship type issue expected");
+}
+
 void SelfEdgeRejected()
 {
     var catalog = ValidCatalog(relationships: new[] { Edge(target: "workshop/CiAi") });
@@ -76,13 +110,23 @@ void UnknownDeclarationRepositoryRejected()
     Check(CatalogValidator.Validate(catalog).Any(i => i.Code == "declaration.unknown-repository"), "unknown declaration repository issue expected");
 }
 
+void InvalidDeclarationRoleRejected()
+{
+    var catalog = ValidCatalog(declarations: new[]
+    {
+        new CapabilityDeclaration("workshop/CiAi", "request-envelope", "1.0.0", (CapabilityRole)999)
+    });
+    Check(CatalogValidator.Validate(catalog).Any(i => i.Code == "declaration.invalid-role"), "invalid declaration role issue expected");
+}
+
 RepositoryCatalog ValidCatalog(
     IEnumerable<RepositoryId>? repositories = null,
+    IEnumerable<CapabilityDefinition>? capabilities = null,
     IEnumerable<RepositoryRelationship>? relationships = null,
     IEnumerable<CapabilityDeclaration>? declarations = null) =>
     new(
         repositories ?? new[] { Repo("workshop/CiAi"), Repo("workshop/HeadlessAi") },
-        new[] { new CapabilityDefinition("request-envelope", "1.0.0") },
+        capabilities ?? new[] { new CapabilityDefinition("request-envelope", "1.0.0") },
         declarations ?? new[] { new CapabilityDeclaration("workshop/CiAi", "request-envelope", "1.0.0", CapabilityRole.Provides) },
         relationships ?? new[] { Edge() });
 
