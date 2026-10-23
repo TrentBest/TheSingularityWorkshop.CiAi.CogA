@@ -8,6 +8,7 @@ Run("unknown capability rejected", UnknownCapabilityRejected);
 Run("incompatible major version rejected", IncompatibleVersionRejected);
 Run("unknown edge endpoint rejected", UnknownEndpointRejected);
 Run("duplicate relationship ID rejected", DuplicateRelationshipRejected);
+Run("declaration for unknown repository rejected", UnknownDeclarationRepositoryRejected);
 
 Console.WriteLine($"PASS: {passed} catalog validation checks.");
 
@@ -61,13 +62,20 @@ void DuplicateRelationshipRejected()
     Check(CatalogValidator.Validate(catalog).Any(i => i.Code == "relationship.duplicate"), "duplicate relationship issue expected");
 }
 
+void UnknownDeclarationRepositoryRejected()
+{
+    var catalog = ValidCatalog(declarations: new[] { new CapabilityDeclaration("workshop/Unknown", "request-envelope", "1.0.0", CapabilityRole.Provides) });
+    Check(CatalogValidator.Validate(catalog).Any(i => i.Code == "declaration.unknown-repository"), "unknown declaration repository issue expected");
+}
+
 RepositoryCatalog ValidCatalog(
     IEnumerable<RepositoryId>? repositories = null,
-    IEnumerable<RepositoryRelationship>? relationships = null) =>
+    IEnumerable<RepositoryRelationship>? relationships = null,
+    IEnumerable<CapabilityDeclaration>? declarations = null) =>
     new(
         repositories ?? new[] { Repo("workshop/CiAi"), Repo("workshop/HeadlessAi") },
         new[] { new CapabilityDefinition("request-envelope", "1.0.0") },
-        new[] { new CapabilityDeclaration("request-envelope", "1.0.0", CapabilityRole.Provides) },
+        declarations ?? new[] { new CapabilityDeclaration("workshop/CiAi", "request-envelope", "1.0.0", CapabilityRole.Provides) },
         relationships ?? new[] { Edge() });
 
 RepositoryRelationship Edge(
