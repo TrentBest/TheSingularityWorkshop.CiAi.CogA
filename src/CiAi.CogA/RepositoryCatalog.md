@@ -1,3 +1,5 @@
+![The Singularity Workshop moniker](https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.GUI/development/docs/assets/fox-sheepdog-10x10.svg)
+
 # RepositoryCatalog.cs — source guide
 
 **Purpose:** defines the offline catalog's typed data model. It makes repository identities, application-owned capabilities, repository declarations, relationship direction, contract versions, and validation issues explicit.
