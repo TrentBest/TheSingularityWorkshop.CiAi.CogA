@@ -1,3 +1,5 @@
+![The Singularity Workshop moniker](https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.GUI/development/docs/assets/fox-sheepdog-10x10.svg)
+
 # CogA library source
 
 The library is dependency-free and contains the typed offline catalog model plus its deterministic validator.
