@@ -16,10 +16,12 @@ flowchart TD
 
 This diagram describes the implemented model shape; it is not a live network topology or evidence of successful dispatch.
 
-## Recipes
+## Run and explore
 
-- [Build and validate an offline catalog](docs/recipes/offline-catalog.md) — construct the smallest useful sample and interpret validation results.
+- [Offline catalog sample](samples/CiAi.CogA.Sample/Program.cs) — construct and validate a sample topology.
+- [Offline catalog recipe](docs/recipes/offline-catalog.md) — run the sample and adversarial checks.
 - [UML class model](docs/UML/RepositoryCatalogUML.md) — inspect model types, directionality, and use cases.
+- [Integration proposal](docs/INTEGRATION.md) — contract questions for CiAi reconciliation.
 
 ## Current limits
 
