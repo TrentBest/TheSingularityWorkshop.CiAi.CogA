@@ -1,3 +1,5 @@
+![The Singularity Workshop moniker](https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.GUI/development/docs/assets/fox-sheepdog-10x10.svg)
+
 # CatalogValidator.cs — source guide
 
 **Purpose:** apply deterministic, offline validation rules to a `RepositoryCatalog`.
