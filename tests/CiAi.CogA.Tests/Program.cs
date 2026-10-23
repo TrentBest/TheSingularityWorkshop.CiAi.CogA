@@ -8,6 +8,7 @@ Run("unknown capability rejected", UnknownCapabilityRejected);
 Run("incompatible major version rejected", IncompatibleVersionRejected);
 Run("unknown edge endpoint rejected", UnknownEndpointRejected);
 Run("duplicate relationship ID rejected", DuplicateRelationshipRejected);
+Run("self-edge rejected", SelfEdgeRejected);
 Run("declaration for unknown repository rejected", UnknownDeclarationRepositoryRejected);
 
 Console.WriteLine($"PASS: {passed} catalog validation checks.");
@@ -60,6 +61,12 @@ void DuplicateRelationshipRejected()
 {
     var catalog = ValidCatalog(relationships: new[] { Edge(id: "edge-1"), Edge(id: "edge-1", target: "workshop/HeadlessAi") });
     Check(CatalogValidator.Validate(catalog).Any(i => i.Code == "relationship.duplicate"), "duplicate relationship issue expected");
+}
+
+void SelfEdgeRejected()
+{
+    var catalog = ValidCatalog(relationships: new[] { Edge(target: "workshop/CiAi") });
+    Check(CatalogValidator.Validate(catalog).Any(i => i.Code == "relationship.self-edge"), "self-edge issue expected");
 }
 
 void UnknownDeclarationRepositoryRejected()
