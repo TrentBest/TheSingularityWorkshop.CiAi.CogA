@@ -9,11 +9,11 @@
 - [x] Typed capability definitions and repository-scoped declarations.
 - [x] Typed directed relationships with contract version, optional trigger, and named authorization requirement.
 - [x] Deterministic structural validator with stable issue codes.
-- [x] Executable offline contract checks, including malformed identities, duplicates, unknown references, incompatible versions, invalid endpoints, and self-edges.
+- [x] Executable offline contract checks, including malformed identities, duplicates, unknown references, incompatible versions, invalid endpoints, self-edges, malformed capability IDs/versions, malformed relationship IDs, and invalid enum values.
 - [x] Runnable offline catalog sample.
 - [x] README, Gallery, source companion guides, UML, recipe, and integration proposal.
 - [x] CI workflow definition with immutable checkout action reference.
-- [x] Successful GitHub Actions run for the proposal commit: build, offline contract checks, and sample all completed successfully.
+- [x] Successful GitHub Actions runs for the latest test commit: push validation and pull-request validation both passed.
 
 ## Not yet implemented / reconciled
 
@@ -29,9 +29,11 @@
 
 ## Validation evidence
 
-- Workflow: [CogA catalog validation run #28](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogA/actions/runs/40036766541)
-- Validated commit at that run: `1ebc881cd86902e4c4b9f28b56ac3a6d57fcf3c8`
-- Result: **success**. The build, offline contract checks, and sample steps all passed.
+Latest commit: [`12e28ac737b561bb77bd3078549d5a18c0c628e2`](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogA/commit/12e28ac737b561bb77bd3078549d5a18c0c628e2)
+
+- [Push validation run #34](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogA/actions/runs/40038737560) — **success**.
+- [Pull-request validation run #35](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogA/actions/runs/40038742783) — **success**.
+- The executable offline test suite now contains 14 checks. The latest commit adds five rejection checks for malformed capability IDs, malformed capability versions, malformed relationship IDs, invalid relationship types, and invalid declaration roles.
 - The .NET SDK was not installed in the assistant execution environment, so validation was performed by the repository's GitHub Actions workflow rather than a local run.
 
 The runnable checks can be repeated with:
