@@ -45,7 +45,7 @@ The catalog is a projection of declared architecture, not proof of runtime conne
 
 ## Status
 
-**Implementation readiness: 35%.** A small dependency-free .NET library, runnable sample, executable offline validation checks, documentation, and a CI workflow definition now exist. CI has not yet been observed green, and this is not a production integration: no provider ingestion, persisted manifest format, ProtocolAi binding, semantic-version range negotiation, or GUI projection is claimed complete.
+**Implementation readiness: 40%.** The dependency-free .NET library, runnable sample, executable offline validation checks, Workshop documentation, and CI validation have all been exercised successfully on the current proposal commit. This remains an experimental slice, not a production integration: no provider ingestion, persisted manifest format, ProtocolAi binding, semantic-version range negotiation, or GUI projection is claimed complete. Shared vocabulary and integration contract review remain open.
 
 ---
 
