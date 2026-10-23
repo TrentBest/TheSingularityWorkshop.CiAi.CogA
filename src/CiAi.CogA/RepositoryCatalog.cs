@@ -33,8 +33,12 @@ public sealed record RepositoryId
 /// <summary>Application-owned capability vocabulary entry, versioned independently of repository names.</summary>
 public sealed record CapabilityDefinition(string Id, string ContractVersion);
 
-/// <summary>Declares a capability that a repository offers or accepts.</summary>
-public sealed record CapabilityDeclaration(string CapabilityId, string ContractVersion, CapabilityRole Role);
+/// <summary>Declares a capability offered or accepted by a specific repository.</summary>
+public sealed record CapabilityDeclaration(
+    string Repository,
+    string CapabilityId,
+    string ContractVersion,
+    CapabilityRole Role);
 
 public enum CapabilityRole
 {
