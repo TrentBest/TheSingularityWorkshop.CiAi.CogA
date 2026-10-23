@@ -29,12 +29,12 @@
 
 ## Validation evidence
 
-Latest commit: [`12e28ac737b561bb77bd3078549d5a18c0c628e2`](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogA/commit/12e28ac737b561bb77bd3078549d5a18c0c628e2)
+Latest test commit: [`12e28ac737b561bb77bd3078549d5a18c0c628e2`](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogA/commit/12e28ac737b561bb77bd3078549d5a18c0c628e2)
 
 - [Push validation run #34](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogA/actions/runs/40038737560) — **success**.
 - [Pull-request validation run #35](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogA/actions/runs/40038742783) — **success**.
 - The executable offline test suite now contains 14 checks. The latest commit adds five rejection checks for malformed capability IDs, malformed capability versions, malformed relationship IDs, invalid relationship types, and invalid declaration roles.
-- The .NET SDK was not installed in the assistant execution environment, so validation was performed by the repository's GitHub Actions workflow rather than a local run.
+- The .NET SDK was not installed in the assistant execution environment, so validation was performed by the repository's GitHub Actions workflow rather than a local run. Subsequent documentation-only commits updated readiness evidence and clarified the ProtocolAi vocabulary proposal; at the time of this edit, no workflow run or commit status had been returned for the latest documentation commit [`8529aaf5af8c2f7ef2bc55cbf4fc1256188a0980`](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogA/commit/8529aaf5af8c2f7ef2bc55cbf4fc1256188a0980). Do not treat that documentation commit as CI-validated until a run is observed.
 
 The runnable checks can be repeated with:
 
