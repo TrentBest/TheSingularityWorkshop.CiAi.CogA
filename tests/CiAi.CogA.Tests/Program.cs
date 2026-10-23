@@ -7,6 +7,8 @@ Run("duplicate repository identity rejected", DuplicateRepositoryRejected);
 Run("unknown capability rejected", UnknownCapabilityRejected);
 Run("malformed capability ID rejected", MalformedCapabilityIdRejected);
 Run("malformed capability version rejected", MalformedCapabilityVersionRejected);
+Run("zero major version rejected", ZeroMajorVersionRejected);
+Run("large numeric version components accepted", LargeNumericVersionComponentsAccepted);
 Run("incompatible major version rejected", IncompatibleVersionRejected);
 Run("unknown edge endpoint rejected", UnknownEndpointRejected);
 Run("duplicate relationship ID rejected", DuplicateRelationshipRejected);
@@ -61,6 +63,22 @@ void MalformedCapabilityVersionRejected()
 {
     var catalog = ValidCatalog(capabilities: new[] { new CapabilityDefinition("request-envelope", "01.0.0") });
     Check(CatalogValidator.Validate(catalog).Any(i => i.Code == "version.malformed"), "malformed capability version issue expected");
+}
+
+void ZeroMajorVersionRejected()
+{
+    var catalog = ValidCatalog(capabilities: new[] { new CapabilityDefinition("request-envelope", "0.9.0") });
+    Check(CatalogValidator.Validate(catalog).Any(i => i.Code == "version.malformed"), "zero major version must be rejected consistently with CogB");
+}
+
+void LargeNumericVersionComponentsAccepted()
+{
+    const string version = "123456789012345678901234567890.2.3";
+    var catalog = ValidCatalog(
+        capabilities: new[] { new CapabilityDefinition("request-envelope", version) },
+        declarations: new[] { new CapabilityDeclaration("workshop/CiAi", "request-envelope", version, CapabilityRole.Provides) },
+        relationships: new[] { Edge(version: version) });
+    Check(CatalogValidator.Validate(catalog).Count == 0, "canonical numeric components must not be limited by Int32 parsing");
 }
 
 void IncompatibleVersionRejected()
