@@ -25,7 +25,7 @@ public sealed class CapabilityDescriptor
         bool enabled = true)
     {
         CapabilityId = RequireToken(capabilityId, nameof(capabilityId), allowDots: true);
-        CapabilityVersion = RequireToken(capabilityVersion, nameof(capabilityVersion));
+        CapabilityVersion = RequireToken(capabilityVersion, nameof(capabilityVersion), allowDots: true);
         ProviderRepository = RequireRepository(providerRepository);
         ImplementationRevision = RequireSha(implementationRevision);
         if (contractVersion < 1) throw new ArgumentOutOfRangeException(nameof(contractVersion));
