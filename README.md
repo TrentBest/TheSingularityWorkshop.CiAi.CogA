@@ -26,9 +26,15 @@ The first implementation is an in-memory catalog populated by trusted coordinato
 - Registration does not imply authorization or execution success.
 - No network access, external dependencies, dynamic code loading, or provider execution.
 
+## Gallery
+
+See [Gallery.md](Gallery.md) for the quick tour and verification recipe.
+
 ## 04 — UML and use case
 
 See [CapabilityCatalog UML and use case](docs/UML/CapabilityCatalogUML.md).
+
+See [CapabilityCatalog class companion](src/TheSingularityWorkshop.CiAi.CogA/CapabilityCatalog.md).
 
 ## 05 — Release status
 

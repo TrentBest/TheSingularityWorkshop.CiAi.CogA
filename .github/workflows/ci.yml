@@ -26,3 +26,7 @@ jobs:
         run: dotnet build tests/TheSingularityWorkshop.CiAi.CogA.ContractTests/TheSingularityWorkshop.CiAi.CogA.ContractTests.csproj --configuration Release --no-restore
       - name: Run contract checks
         run: dotnet run --project tests/TheSingularityWorkshop.CiAi.CogA.ContractTests --configuration Release --no-build
+      - name: Pack package candidate
+        run: dotnet pack src/TheSingularityWorkshop.CiAi.CogA/TheSingularityWorkshop.CiAi.CogA.csproj --configuration Release --output artifacts
+      - name: Validate package artifact exists
+        run: test -n "$(find artifacts -maxdepth 1 -name '*.nupkg' -print -quit)"
