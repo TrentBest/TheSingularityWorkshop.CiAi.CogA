@@ -1,0 +1,28 @@
+name: CogA Contract Verification
+
+on:
+  push:
+    branches: [master, development]
+  pull_request:
+    branches: [master, development]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Setup .NET
+        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore
+        run: dotnet restore tests/TheSingularityWorkshop.CiAi.CogA.ContractTests/TheSingularityWorkshop.CiAi.CogA.ContractTests.csproj
+      - name: Build
+        run: dotnet build tests/TheSingularityWorkshop.CiAi.CogA.ContractTests/TheSingularityWorkshop.CiAi.CogA.ContractTests.csproj --configuration Release --no-restore
+      - name: Run contract checks
+        run: dotnet run --project tests/TheSingularityWorkshop.CiAi.CogA.ContractTests --configuration Release --no-build
