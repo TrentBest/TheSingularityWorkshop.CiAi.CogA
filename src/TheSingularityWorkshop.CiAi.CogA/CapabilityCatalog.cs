@@ -5,6 +5,15 @@ namespace TheSingularityWorkshop.CiAi.CogA;
 /// <summary>A validated, immutable declaration of a versioned capability provider.</summary>
 public sealed class CapabilityDescriptor
 {
+    /// <summary>Creates a capability declaration with explicit provider, contract, revision, and media types.</summary>
+    /// <param name="capabilityId">Stable capability identifier.</param>
+    /// <param name="capabilityVersion">Version of the capability contract offered by the provider.</param>
+    /// <param name="providerRepository">Provider repository in owner/repository form.</param>
+    /// <param name="implementationRevision">Full commit SHA pinning the implementation.</param>
+    /// <param name="contractVersion">Positive integer version of the descriptor contract.</param>
+    /// <param name="inputMediaTypes">Allowed input media types.</param>
+    /// <param name="outputMediaTypes">Declared output media types.</param>
+    /// <param name="enabled">Whether the declaration is currently offered; this is not an authorization decision.</param>
     public CapabilityDescriptor(
         string capabilityId,
         string capabilityVersion,
@@ -27,13 +36,21 @@ public sealed class CapabilityDescriptor
         Enabled = enabled;
     }
 
+    /// <summary>Stable name of the capability, such as <c>uml.generate</c>.</summary>
     public string CapabilityId { get; }
+    /// <summary>Version offered for this capability.</summary>
     public string CapabilityVersion { get; }
+    /// <summary>Repository identity of the provider in owner/repository form.</summary>
     public string ProviderRepository { get; }
+    /// <summary>Full immutable source revision of the provider implementation.</summary>
     public string ImplementationRevision { get; }
+    /// <summary>Version of the descriptor contract.</summary>
     public int ContractVersion { get; }
+    /// <summary>Read-only snapshot of accepted input media types.</summary>
     public IReadOnlyList<string> InputMediaTypes { get; }
+    /// <summary>Read-only snapshot of declared output media types.</summary>
     public IReadOnlyList<string> OutputMediaTypes { get; }
+    /// <summary>Whether the provider currently offers this declaration; not an authorization grant.</summary>
     public bool Enabled { get; }
 
     internal string Key => $"{CapabilityId}\n{CapabilityVersion}\n{ProviderRepository}";
