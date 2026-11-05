@@ -2,6 +2,7 @@
 
 # CiAi.CogA — Repository Catalog
 
+[![Sith Policy](assets/sith-policy.svg)](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogA/actions/workflows/sith-policy.yml)
 **CogA owns the offline catalog model:** canonical repository identities, declared capabilities, and directed, versioned relationships. It is an experimental design slice within [CiAi](https://github.com/TrentBest/TheSingularityWorkshop.CiAi), not a GitHub client or workflow dispatcher.
 
 The model follows the parent [inter-repository contract](https://github.com/TrentBest/TheSingularityWorkshop.CiAi/blob/development/docs/INTER_REPOSITORY_MODEL.md) and [Cog assignments](https://github.com/TrentBest/TheSingularityWorkshop.CiAi/blob/development/docs/COG_ASSIGNMENTS.md). Repository identity and capability vocabulary are explicit; capability roles are composable; edges point from source to target. Catalog validation is deterministic and runs offline.
