@@ -1,5 +1,7 @@
 # The Singularity Workshop CiAi.CogA
 
+[![Sith Policy](assets/sith-policy.svg)](https://github.com/TrentBest/TheSingularityWorkshop.CiAi.CogA/actions/workflows/sith-policy.yml)
+
 **CogA is the CiAi capability catalog.** It records explicit, version-pinned capability declarations; it does not execute provider work or grant permission to invoke it.
 
 ## 01 — See it in a minute
