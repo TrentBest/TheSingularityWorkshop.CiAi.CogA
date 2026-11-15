@@ -9,7 +9,7 @@ The model follows the parent [inter-repository contract](https://github.com/Tren
 
 ## 01 — See it in a minute
 
-Requires the .NET 8 SDK.
+Requires the .NET 10 SDK.
 
 ```bash
 dotnet run --project samples/CiAi.CogA.Sample/CiAi.CogA.Sample.csproj
